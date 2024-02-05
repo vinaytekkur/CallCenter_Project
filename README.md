@@ -63,6 +63,10 @@ Every Call Center agent assigned 3 accounts - Seniors assigned high prioritized 
 **Final Data Factory pipeline:**
 ![image](https://github.com/vinaytekkur/CallCenter_Project/assets/156997918/28a1b341-357d-4961-89c1-1b7599e098bf)
 
+Sample Mail Triggered after Successful execution:
+![image](https://github.com/vinaytekkur/CallCenter_Project/assets/156997918/db88d0ae-3d08-447d-86a5-69927ba82e09)
+
+
 Enjoyed doing this project - SQL server, Data insertions, Data pipeline design and writing logic everything implemented from scratch :)
 Thanks, Have a great day!!
 
