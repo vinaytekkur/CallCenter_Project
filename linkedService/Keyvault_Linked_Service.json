@@ -1,0 +1,11 @@
+{
+	"name": "Keyvault_Linked_Service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://keyvault-callcenter.vault.azure.net/"
+		}
+	}
+}

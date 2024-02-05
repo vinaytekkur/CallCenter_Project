@@ -1,0 +1,38 @@
+{
+	"name": "Source_DB_Dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Source_DB_Linked_Service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "report_date",
+				"type": "date"
+			},
+			{
+				"name": "id",
+				"type": "varchar"
+			},
+			{
+				"name": "call_center_id",
+				"type": "varchar"
+			},
+			{
+				"name": "person_name",
+				"type": "varchar"
+			},
+			{
+				"name": "position",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "call_center_people_list"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,153 @@
+{
+	"name": "CallCenter_MasterExecution",
+	"properties": {
+		"activities": [
+			{
+				"name": "Source_Script_Execution",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Source_Data_Execution",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CallCenter_Logic_Execution",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Source_Script_Execution",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CallCenter_Logic_Execution",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Email_Notification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Source_Script_Execution",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Email_Notification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"status": "Success"
+					}
+				}
+			},
+			{
+				"name": "Email_Notification1",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Source_Script_Execution",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Email_Notification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"status": "Failed"
+					}
+				}
+			},
+			{
+				"name": "Email_Notification2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "CallCenter_Logic_Execution",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Email_Notification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"status": "Success"
+					}
+				}
+			},
+			{
+				"name": "Email_Notification3",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "CallCenter_Logic_Execution",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Email_Notification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"status": "Failed"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-02-05T15:05:53Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

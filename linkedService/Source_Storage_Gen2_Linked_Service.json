@@ -1,0 +1,22 @@
+{
+	"name": "Source_Storage_Gen2_Linked_Service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://sourcestoragevgtsol.dfs.core.windows.net/",
+			"tenant": "514382e5-0248-4437-9dea-5f2f0e823aab",
+			"servicePrincipalId": "473563b0-87f0-4b29-87c7-c09f9cba2e55",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"servicePrincipalCredential": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "Keyvault_Linked_Service",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "spn-callcenter-secret-key"
+			}
+		}
+	}
+}

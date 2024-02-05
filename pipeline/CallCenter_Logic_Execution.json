@@ -1,0 +1,30 @@
+{
+	"name": "CallCenter_Logic_Execution",
+	"properties": {
+		"activities": [
+			{
+				"name": "CallCenter_Logic_Execution",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[CallCenter_Execution_SP]"
+				},
+				"linkedServiceName": {
+					"referenceName": "Source_DB_Linked_Service",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-02-05T13:57:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

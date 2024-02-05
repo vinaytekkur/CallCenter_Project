@@ -1,0 +1,19 @@
+{
+	"name": "Source_DB_Linked_Service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=callcenter-vgtsolutions.database.windows.net;Initial Catalog=source-callcenter-vgtsol;User ID=vinay",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "Keyvault_Linked_Service",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "source-sql-server-password"
+			}
+		}
+	}
+}

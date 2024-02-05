@@ -1,0 +1,188 @@
+{
+	"name": "Source_Data_Execution",
+	"properties": {
+		"activities": [
+			{
+				"name": "Source_Insert_SP",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[add_sales_data]"
+				},
+				"linkedServiceName": {
+					"referenceName": "Source_DB_Linked_Service",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "CallCenter_People_Data",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Source_Insert_SP",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('date_part=', formatDateTime(utcNow(), 'yyyy-MM-dd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "report_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "report_date",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "call_center_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "call_center_id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "person_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "person_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "position",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "position",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Source_CallCenter_People_dataset",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Source_DB_Dataset",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Get_Sales_Rank_Execution",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "CallCenter_People_Data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[get_sales_with_rank]"
+				},
+				"linkedServiceName": {
+					"referenceName": "Source_DB_Linked_Service",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"variables": {
+			"datepart": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-02-05T13:57:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "adfcallcenter-vgtsolutions",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "640f8fed-971d-4d07-b225-4c861c553e24",
+		"tenantId": "514382e5-0248-4437-9dea-5f2f0e823aab"
+	}
+}
