@@ -36,7 +36,7 @@ Call Center "XYZ" wants to build complete end-to-end solution for it's handling 
 Pipeline data designed based on daily execution status - it takes data dynamically picking respective folder from Gen2 storage and executing respective logic. Also will receive Email Notification if pipeline executed successfully or failed.
 
 **Source Data:**
-Call Center Sales data architecture:
+Call Center Sales data DB architechture:
 ![image](https://github.com/vinaytekkur/CallCenter_Project/assets/156997918/e637f44c-e3f2-450c-ba4f-e512d2ca0797)
 
 **Step 1:**
