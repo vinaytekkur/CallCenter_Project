@@ -1,4 +1,4 @@
-![image](https://github.com/vinaytekkur/CallCenter_Project/assets/156997918/bfb62aea-06e2-41ff-ba3e-db6dd748d65b)# CallCenter_Project
+# Call Center Project
 Complete ETL data pipeline with business logic execution of one of Call Center using Azure.
 
 **Bussiness Statement/Requirement:**
@@ -46,7 +46,7 @@ Call Center Sales data architecture:
 
 **Step 2:**
 1) Execute Business Logic - Based on customers priority dynamically assign respective Call Center Agent
-   Example: On 5th Feb in csv file we received total 4 Call Center Agents
+2) Example: On 5th Feb in csv file we received total 4 Call Center Agents
 ![image](https://github.com/vinaytekkur/CallCenter_Project/assets/156997918/6ceeca4b-9577-452a-a62b-c7a1df99ff33)
 
 Using Stored Procedure prioritized respective customers:
